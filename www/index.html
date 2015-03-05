@@ -2,33 +2,100 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <title>Todo</title>
     <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
-    <title></title>
 
+    <!-- IONIC CSS -->
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
 
-    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
-    <link href="css/ionic.app.css" rel="stylesheet">
-    -->
-
-    <!-- ionic/angularjs js -->
+    <!-- CORE IONIC JS -->
+    <!-- ngAnimate and ngSanitize are built in -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
 
-    <!-- cordova script (this will be a 404 during development) -->
-    <script src="cordova.js"></script>
-
-    <!-- your app's js -->
+    <!-- app JS -->
     <script src="js/app.js"></script>
-  </head>
-  <body ng-app="starter">
 
-    <ion-pane>
-      <ion-header-bar class="bar-stable">
-        <h1 class="title">Ionic Blank Starter</h1>
-      </ion-header-bar>
-      <ion-content>
+    <!-- Needed for Cordova/PhoneGap (will be a 404 during development) -->
+    <!-- Needs to be the LAST script! Does not appear in dev files, but is added automatically during the build -->
+    <script src="cordova.js"></script>
+  </head>
+  <body ng-app="todo" ng-controller="TodoCtrl"> <!-- the ng-app attribute seems to tell Angular to come in and look for controllers -->
+
+  <!-- this makes the side menu happen -->  
+  <ion-side-menus> <!-- this is a controller -->
+
+    <!-- the content -->
+    <ion-side-menu-content>
+
+      <ion-header-bar class="bar-dark"> <!-- a header bar -->
+        <button class="button button-icon" ng-click="toggleProjects()">
+          <i class="icon ion-navicon"></i>
+        </button>
+        <h1 class="title">{{activeProject.title}}</h1> <!-- an h1 tag -->
+        <!-- New Task Button -->
+        <button class="button button-icon" ng-click="newTask()">
+          <i class="icon ion-compose"></i>
+        </button>
+      </ion-header-bar> 
+
+      <ion-content scroll="false">
+      <!-- our list and list items -->
+        <ion-list>
+          <ion-item ng-repeat="task in activeProject.tasks">
+            {{task.title}}
+          </ion-item>
+        <ion-list>
       </ion-content>
-    </ion-pane>
-  </body>
+
+    </ion-side-menu-content>
+
+    <!-- the menu off to the side -->
+    <ion-side-menu side="left">
+      <ion-header-bar class="bar-dark"> <!-- a header bar -->
+        <h1 class="title">Projects</h1> <!-- projects for us to choose from -->
+        <button class="button button-icon ion-plus" ng-click="newProject()">
+        </button>
+      </ion-header-bar>
+      <ion-content scroll="false">
+        <ion-list>
+          <ion-item ng-repeat="project in projects" ng-click="selectProject(project, $index)" ng-class="{activeProject == project}">
+          {{project.title}}
+          </ion-item>
+         </ion-list>
+       </ion-content>
+    </ion-side-menu>
+
+
+    <!-- Modal for adding a new task -->
+    <script id="new-task.html" type="text/ng-template">
+    <!-- defines this as an angular template this one is local, so that's why it's smack dab in the middle of my .html file -->
+      <div class="modal">
+
+      <!--modal header bar-->
+       <ion-header-bar class="bar-secondary">
+        <h1 class="title">New Task</h1>
+        <button class="button button-clear button-positive" ng-click="closeNewTask()">Cancel</button>
+        </ion-header-bar>
+
+        <!--modal content area -->
+        <ion-content>
+          <form ng-submit="createTask(task)">
+          <!-- The task that is passed to createTask is the object corresponding to the entered form data -->
+            <div class="list">
+              <label class="item item-input">
+                <input type="text" placeholder="What do you need to do?" ng-model="task.title">
+                <!-- Since our text input has ng-model="task.title", that text input will set the title property of the task object. -->
+              </lable>
+            </div>
+            <div class="padding">
+              <button type="submit" class="button button-block button-positive">Create Task</button>
+            </div>
+          </form>
+        </ion-content>
+      </div>
+    </script>
+
+
+  </ion-side-menus>
+</body>
 </html>
