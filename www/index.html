@@ -7,6 +7,7 @@
 
     <!-- IONIC CSS -->
     <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
 
     <!-- CORE IONIC JS -->
     <!-- ngAnimate and ngSanitize are built in -->
@@ -31,14 +32,17 @@
         <button class="button button-icon" ng-click="toggleProjects()">
           <i class="icon ion-navicon"></i>
         </button>
-        <h1 class="title">{{activeProject.title}}</h1> <!-- an h1 tag -->
-        <!-- New Task Button -->
-        <button class="button button-icon" ng-click="showDelete()">
-          <i class="icon ion-close-round"></i>
-        </button>
-        <button class="button button-icon" ng-click="newTask()">
-          <i class="icon ion-compose"></i>
-        </button>
+            <h1 class="title">{{activeProject.title}}</h1> <!-- an h1 tag -->
+            <!-- New Task Button -->
+
+            <button class="button button-icon right" ng-click="showDelete()"  >
+              <i class="icon ion-close-round "></i>
+            </button>
+
+            <button class="button button-icon" ng-click="newTask()">
+              <i class="icon ion-compose"></i>
+            </button>
+
       </ion-header-bar> 
 
       <ion-content scroll="false">

@@ -1,1 +1,10 @@
 /* Empty. Add your own CSS if you like */
+.right {
+	right: 50px;
+	position:absolute;
+	}
+
+.item{
+	padding-top:0px;
+	padding-bottom:0px;
+}
