@@ -34,6 +34,9 @@
         <h1 class="title">{{activeProject.title}}</h1> <!-- an h1 tag -->
         <!-- New Task Button -->
         <button class="button button-icon" ng-click="newTask()">
+          <i class="icon ion-close-round"></i>
+        </button>
+        <button class="button button-icon" ng-click="newTask()">
           <i class="icon ion-compose"></i>
         </button>
       </ion-header-bar> 
@@ -42,7 +45,11 @@
       <!-- our list and list items -->
         <ion-list>
           <ion-item ng-repeat="task in activeProject.tasks">
+            <ion-delete-button class="ion-minus-circled" 
+                             ng-click="onItemDelete(item)">
+          </ion-delete-button>
             {{task.title}}
+
           </ion-item>
         <ion-list>
       </ion-content>
