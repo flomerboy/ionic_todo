@@ -50,6 +50,12 @@ angular.module('todo', ['ionic'])
 		$scope.selectProject(newProject, $scope.projects.length-1);
 	}
 
+	$scope.myValue = true;
+
+	$scope.showDelete = function(){
+		$scope.myValue = !$scope.myValue;
+	}
+
 	//load or initialize projects
 	$scope.projects = Projects.all();
 
