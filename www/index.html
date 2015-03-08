@@ -45,11 +45,10 @@
       <!-- our list and list items -->
         <ion-list>
           <ion-item ng-repeat="task in activeProject.tasks">
-            <button class="button button-icon" ng-click="newTask()" ng-show="!myValue">
-              <i class="icon ion-minus-circled"></i>
+            <button class="button button-icon"  ng-show="!myValue" ng-click="deleteTask(task)">
+              <i class="icon ion-minus-circled" ></i>
             </button>
             {{task.title}}
-
           </ion-item>
         <ion-list>
       </ion-content>
@@ -65,7 +64,7 @@
       </ion-header-bar>
       <ion-content scroll="false">
         <ion-list>
-          <ion-item ng-repeat="project in projects" ng-click="selectProject(project, $index)" ng-class="{activeProject == project}">
+          <ion-item ng-repeat="project in projects" ng-click="selectProject(project, $index)" ng-class="{activeProject : project}">
           {{project.title}}
           </ion-item>
          </ion-list>

@@ -54,7 +54,13 @@ angular.module('todo', ['ionic'])
 
 	$scope.showDelete = function(){
 		$scope.myValue = !$scope.myValue;
-	}
+		console.log('deleting');
+	};
+
+ 	$scope.deleteTask = function (task) {
+        $scope.activeProject.tasks.splice($scope.activeProject.tasks.indexOf(task), 1);
+        console.log('deleting');
+  	};
 
 	//load or initialize projects
 	$scope.projects = Projects.all();
@@ -89,9 +95,11 @@ angular.module('todo', ['ionic'])
 		if (!$scope.activeProject || !task){
 			return;
 		}
+
 		$scope.activeProject.tasks.push({
       		title: task.title
    		});
+
     	$scope.taskModal.hide();
 
 		//inefficient, but save all the projects
